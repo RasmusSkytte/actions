@@ -2,6 +2,9 @@ name: 'check-r-package'
 description: 'Action to check R package with rcmdcheck. Assumes that rcmdcheck has already been installed.'
 author: 'Jim Hester'
 inputs:
+  path:
+    description: 'Path to the R package or package tar ball to check.'
+    default: '.'
   args:
     description: 'Arguments to pass to the `args` parameter of rcmdcheck. Must be an R expression. Note that it often needs to be quoted in YAML, see the README for details.'
     default: 'c("--no-manual", "--as-cran")'
@@ -46,7 +49,7 @@ runs:
         if (Sys.getenv("_R_CHECK_FORCE_SUGGESTS_", "") == "") Sys.setenv("_R_CHECK_FORCE_SUGGESTS_" = "false")
         if (Sys.getenv("_R_CHECK_CRAN_INCOMING_", "") == "") Sys.setenv("_R_CHECK_CRAN_INCOMING_" = "false")
         cat("check-dir-path=", file.path(getwd(), (${{ inputs.check-dir }})), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
-        check_results <- rcmdcheck::rcmdcheck(args = (${{ inputs.args }}), build_args = (${{ inputs.build_args }}), error_on = (${{ inputs.error-on }}), check_dir = (${{ inputs.check-dir }}))
+        check_results <- rcmdcheck::rcmdcheck(path =  ${{ inputs.path }}, args = (${{ inputs.args }}), build_args = (${{ inputs.build_args }}), error_on = (${{ inputs.error-on }}), check_dir = (${{ inputs.check-dir }}))
       shell: Rscript {0}
       working-directory: ${{ inputs.working-directory }}
 

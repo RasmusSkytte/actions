@@ -7,6 +7,7 @@ This action checks an R package using the [rcmdcheck](https://r-lib.github.io/rc
 # Usage
 
 Inputs available:
+- path - default `"."`. Path to the R package or package tar ball to check.
 - args - default `c("--no-manual", "--as-cran")`. Arguments to pass to the
   `args` parameter of `rcmdcheck`. It must be an R expression.
   Note that you often need to quote it, see details below.
