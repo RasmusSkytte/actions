@@ -4,7 +4,7 @@ author: 'Jim Hester'
 inputs:
   path:
     description: 'Path to the R package or package tar ball to check.'
-    default: '.'
+    default: '"."'
   args:
     description: 'Arguments to pass to the `args` parameter of rcmdcheck. Must be an R expression. Note that it often needs to be quoted in YAML, see the README for details.'
     default: 'c("--no-manual", "--as-cran")'
